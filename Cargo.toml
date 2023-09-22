@@ -1,0 +1,16 @@
+[package]
+name = "ramtu_clamp"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.4.4", features = ["derive"] }
+pcap-parser = "0.14.1"
+
+nfqueue = "0.9.1"
+libc = "0.2.148"
+
+pnet = "0.34.0"
+pnet_packet = "0.34.0"

@@ -20,9 +20,10 @@ fn handle_ip_packet(ip6_pkt: &mut Ipv6Packet, mtu_value: u32, log: bool) -> Opti
         println!("Found RA packet: \n    {:?}\n    {:?}", ip6_pkt, ra_pkt);
     }
 
+    let mut options = ra_pkt.get_options();
     let mut existing_mtu = false;
-    for opt in ra_pkt.get_options_iter() {
-        if opt.get_option_type() == NdpOptionTypes::MTU {
+    for opt in options.iter() {
+        if opt.option_type == NdpOptionTypes::MTU {
             existing_mtu = true;
             break;
         }
@@ -41,7 +42,6 @@ fn handle_ip_packet(ip6_pkt: &mut Ipv6Packet, mtu_value: u32, log: bool) -> Opti
     let mut r_ra_pkt = MutableRouterAdvertPacket::new(r_ip6_pkt.payload_mut()).unwrap();
     assert_eq!(r_ra_pkt.get_icmpv6_type(), Icmpv6Types::RouterAdvert);
 
-    let mut options = r_ra_pkt.get_options();
     for opt in options.iter_mut() {
         if opt.option_type == NdpOptionTypes::MTU {
             if opt.data.len() != 6 {

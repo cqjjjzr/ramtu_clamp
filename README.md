@@ -5,6 +5,7 @@ This utility acts as a Netfilter queue userspace program to manipulate the ICMPv
 Useful for situations such as IPv6-only site-to-site link-layer tunnels.
 
 Example: Bridge one network with IPv6 connectivity (router and DHCPv6 servers on the link) with other networks without IPv6 connectivity using tunnels like GRETAP or VXLAN, without tunneling IPv4 traffic.
+In this case you want the IPv4 MTU to be the normal value (e.g. 1500) but the IPv6 MTU to be a lower value to avoid fragmentation in tunnel.
 
 ## Build
 
